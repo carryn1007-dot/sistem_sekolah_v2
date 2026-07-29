@@ -8,12 +8,37 @@ class StudentController extends Controller
 {
     public function index() 
     {
-        return "Ini adalah halaman daftar siswa";
+        $title = "Sistem Sekolah - Daftar Siswa";
+        $students = [
+            [
+                'id' => 1,
+                'nis' => '22100001',
+                'name' => 'Andi',
+                'class' => 'XII TKJ 3',
+                'major' => 'TKJ'
+            ],
+            [
+                'id' => 2,
+                'nis' => '22100002',
+                'name' => 'Budi',
+                'class' => 'XII AKL 1',
+                'major' => 'AKL'
+            ],
+        ]; 
+
+        return view('students.index', [
+            'title' => $title,
+            'students' => $students
+        ]);
     }
 
     public function create()
     {
-        return "Ini adalah halaman tambah siswa";
+        $title = "Catat Siswa Baru - Sistem Sekolah";
+
+            return view('students.create', [
+            'title' => $title
+        ]);
     }
 
     public function store(Request $request)
@@ -23,12 +48,20 @@ class StudentController extends Controller
 
     public function show(string $id)
     {
-        return "Menampilkan detail siswa dengan ID: {$id}";
+        $title = "Lembar Siswa - Sistem Sekolah";
+
+            return view('students.show', [
+            'title' => $title
+        ]);
     }
 
     public function edit(string $id)
     {
-        return "Ini adalah halaman edit siswa dengan ID: {$id}";
+        $title = "Ubah Data Siswa - Sistem Sekolah";
+        
+            return view('students.edit', [
+            'title' => $title
+        ]);
     }
 
     public function update(Request $request, string $id)
