@@ -11,12 +11,8 @@ class SchoolClassController extends Controller
      */
     public function index()
     {
-        return "Ini adalah halaman daftar kelas";
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    }
     public function create()
     {
         return "Ini adalah halaman tambah kelas";

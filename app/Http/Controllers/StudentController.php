@@ -6,38 +6,33 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    public function index() 
-    {
-        $title = "Sistem Sekolah - Daftar Siswa";
-        $students = [
-            [
-                'id' => 1,
-                'nis' => '1001',
-                'name' => 'Andi',
-                'class' => 'XII TKJ 1',
-                'major' => 'TKJ'
-            ],
-            [
-                'id' => 2,
-                'nis' => '1002',
-                'name' => 'Budi',
-                'class' => 'XII TKJ 2',
-                'major' => 'TKJ'
-            ],
-            [
-                'id'=> 3,
-                'nis'=> '1003',
-                'name'=> 'Nina',
-                'class'=> 'XII TKJ 3',
-                'major'=> 'TKJ'
-            ]
-        ]; 
 
-        return view('students.index', [
-            'title' => $title,
-            'students' => $students
-        ]);
-    }
+public function index()
+{
+    $title = 'Sistem Sekolah - Daftar Kelas';
+
+    $classes = [
+        [
+            'id' => 1,
+            'name' => 'XII AKL 1',
+            'grade' => 'XII',
+            'major' => 'AKL',
+            'homeroom_teacher' => 'Budi Santoso',
+        ],
+        [
+            'id' => 2,
+            'name' => 'XII TKJ 1',
+            'grade' => 'XII',
+            'major' => 'TKJ',
+            'homeroom_teacher' => 'Siti Aminah',
+        ],
+    ];
+
+    return view('schoolclasses.index', [
+        'title' => $title,
+        'classes' => $classes,
+    ]);
+}
 
     public function create()
     {
