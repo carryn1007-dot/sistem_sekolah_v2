@@ -4,11 +4,10 @@
 
 @section('content')
 
-    <x-page-header title="Ubah Data Siswa"
-        description="Perbarui informasi siswa yang tersimpan di dalam buku induk sekolah." />
+    <x-page-header :title="$title" description="Ubah data siswa yang sudah terdaftar dalam buku induk." />
 
     <form action="{{ route('students.update', $student['id']) }}" method="POST"
-        class="space-y-6 border border-[#E5E3DB] bg-white p-8">
+        class="mt-6 space-y-6 border border-[#E5E3DB] bg-white p-8">
 
         @csrf
         @method('PUT')
@@ -32,25 +31,6 @@
         </div>
 
         <div>
-            <label for="gender" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
-                Jenis Kelamin
-            </label>
-
-            <select id="gender" name="gender"
-                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
-
-                <option value="Laki-laki" {{ $student['gender'] == 'Laki-laki' ? 'selected' : '' }}>
-                    Laki-laki
-                </option>
-
-                <option value="Perempuan" {{ $student['gender'] == 'Perempuan' ? 'selected' : '' }}>
-                    Perempuan
-                </option>
-
-            </select>
-        </div>
-
-        <div>
             <label for="major" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
                 Jurusan
             </label>
@@ -58,15 +38,15 @@
             <select id="major" name="major"
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
 
-                <option value="AKL" {{ $student['major'] == 'AKL' ? 'selected' : '' }}>
+                <option value="AKL" {{ $student['major'] === 'AKL' ? 'selected' : '' }}>
                     AKL
                 </option>
 
-                <option value="TKJ" {{ $student['major'] == 'TKJ' ? 'selected' : '' }}>
+                <option value="TKJ" {{ $student['major'] === 'TKJ' ? 'selected' : '' }}>
                     TKJ
                 </option>
 
-                <option value="BD" {{ $student['major'] == 'BD' ? 'selected' : '' }}>
+                <option value="BD" {{ $student['major'] === 'BD' ? 'selected' : '' }}>
                     BD
                 </option>
 
@@ -84,7 +64,7 @@
 
         <div class="flex justify-end gap-4 border-t border-[#EFEDE6] pt-6">
 
-            <a href="{{ route('students.index') }}"
+            <a href="{{ route('students.show', $student['id']) }}"
                 class="px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-[#16213A]">
                 Batal
             </a>

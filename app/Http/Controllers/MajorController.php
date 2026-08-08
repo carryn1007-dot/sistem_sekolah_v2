@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class MajorController extends Controller
 {
-    private function majors()
+    public function majors()
     {
         return [
             [

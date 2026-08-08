@@ -6,24 +6,22 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
-    private function students()
+    public function students()
     {
         return [
             [
                 'id' => 1,
-                'nis' => '2024001',
-                'name' => 'Budi Ariyanto',
-                'gender' => 'Laki-laki',
-                'major' => 'AKL',
-                'class' => 'XII AKL 1',
+                'nis' => '1001',
+                'name' => 'Andi',
+                'major' => 'TKJ',
+                'class' => 'XII TKJ 1',
             ],
             [
                 'id' => 2,
-                'nis' => '2024002',
-                'name' => 'Siti Aminah',
-                'gender' => 'Perempuan',
+                'nis' => '1002',
+                'name' => 'Budi',
                 'major' => 'TKJ',
-                'class' => 'XII TKJ 1',
+                'class' => 'XII TKJ 2',
             ],
         ];
     }
@@ -36,7 +34,7 @@ class StudentController extends Controller
 
         return view('students.index', [
             'title' => $title,
-            'students' => $students
+            'students' => $students,
         ]);
     }
 
@@ -45,13 +43,13 @@ class StudentController extends Controller
         $title = 'Sistem Sekolah - Catat Siswa Baru';
 
         return view('students.create', [
-            'title' => $title
+            'title' => $title,
         ]);
     }
 
     public function store(Request $request)
     {
-        return "Menambah data siswa baru";
+        return 'Menambah data siswa baru';
     }
 
     public function show(string $id)
@@ -60,7 +58,8 @@ class StudentController extends Controller
 
         $students = $this->students();
 
-        $student = collect($students)->firstWhere('id', (int) $id);
+        $student = collect($students)
+            ->firstWhere('id', (int) $id);
 
         if (!$student) {
             abort(404);
@@ -68,7 +67,7 @@ class StudentController extends Controller
 
         return view('students.show', [
             'title' => $title,
-            'student' => $student
+            'student' => $student,
         ]);
     }
 
@@ -78,7 +77,8 @@ class StudentController extends Controller
 
         $students = $this->students();
 
-        $student = collect($students)->firstWhere('id', (int) $id);
+        $student = collect($students)
+            ->firstWhere('id', (int) $id);
 
         if (!$student) {
             abort(404);
@@ -86,7 +86,7 @@ class StudentController extends Controller
 
         return view('students.edit', [
             'title' => $title,
-            'student' => $student
+            'student' => $student,
         ]);
     }
 

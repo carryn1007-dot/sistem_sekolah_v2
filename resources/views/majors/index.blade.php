@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <x-page-header title="Daftar Jurusan" description="Daftar seluruh program keahlian yang tersedia di sekolah." />
+    <x-page-header title="Daftar Jurusan" description="Daftar seluruh jurusan yang tersedia di sekolah." />
 
     <div class="mb-5 flex justify-end">
         <a href="{{ route('majors.create') }}"
@@ -19,13 +19,11 @@
 
             <thead>
                 <tr class="border-b border-[#16213A] text-[11px] uppercase tracking-[0.15em] text-[#16213A]">
-
                     <th class="w-14 px-5 py-3.5">No.</th>
                     <th class="px-5 py-3.5">Kode</th>
                     <th class="px-5 py-3.5">Nama Jurusan</th>
                     <th class="px-5 py-3.5">Deskripsi</th>
                     <th class="px-5 py-3.5 text-right">Tindakan</th>
-
                 </tr>
             </thead>
 
@@ -39,7 +37,7 @@
                             {{ $loop->iteration }}
                         </td>
 
-                        <td class="px-5 py-4 font-mono text-xs font-semibold text-slate-500">
+                        <td class="px-5 py-4 font-mono text-xs text-[#16213A]">
                             {{ $major['code'] }}
                         </td>
 
@@ -47,7 +45,7 @@
                             {{ $major['name'] }}
                         </td>
 
-                        <td class="max-w-md px-5 py-4 text-slate-500">
+                        <td class="px-5 py-4 text-slate-500">
                             {{ $major['description'] }}
                         </td>
 

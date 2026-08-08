@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <x-page-header title="Tambah Jurusan" description="Tambahkan program keahlian baru ke dalam sistem sekolah." />
+    <x-page-header title="Tambah Jurusan" description="Tambahkan data jurusan baru ke dalam sistem sekolah." />
 
     <form action="{{ route('majors.store') }}" method="POST" class="space-y-6 border border-[#E5E3DB] bg-white p-8">
 
@@ -15,8 +15,8 @@
                 Kode Jurusan
             </label>
 
-            <input type="text" id="code" name="code" placeholder="Contoh: AKL"
-                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm uppercase placeholder:text-slate-400 focus:border-[#A16207] focus:bg-white focus:outline-none">
+            <input type="text" id="code" name="code" placeholder="Contoh: TKJ"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm placeholder:text-slate-400 focus:border-[#A16207] focus:bg-white focus:outline-none">
         </div>
 
         <div>
@@ -24,7 +24,7 @@
                 Nama Jurusan
             </label>
 
-            <input type="text" id="name" name="name" placeholder="Contoh: Akuntansi dan Keuangan Lembaga"
+            <input type="text" id="name" name="name" placeholder="Contoh: Teknik Komputer dan Jaringan"
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm placeholder:text-slate-400 focus:border-[#A16207] focus:bg-white focus:outline-none">
         </div>
 
@@ -34,7 +34,7 @@
             </label>
 
             <textarea id="description" name="description" rows="5" placeholder="Masukkan deskripsi jurusan"
-                class="w-full resize-none border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm placeholder:text-slate-400 focus:border-[#A16207] focus:bg-white focus:outline-none"></textarea>
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm placeholder:text-slate-400 focus:border-[#A16207] focus:bg-white focus:outline-none"></textarea>
         </div>
 
         <div class="flex justify-end gap-4 border-t border-[#EFEDE6] pt-6">

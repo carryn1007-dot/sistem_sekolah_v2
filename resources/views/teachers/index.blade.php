@@ -1,119 +1,102 @@
-<x-layouts.app :title="$title">
+@extends('layouts.app')
 
-    <div class="mb-6 flex items-center justify-between">
-        <div>
-            <div class="mb-2 flex items-center gap-2 text-xs text-slate-400">
-                <a href="/" class="hover:text-[#16213A]">
-                    Dashboard
-                </a>
-                <span>→</span>
-                <span>Guru</span>
-            </div>
+@section('title', $title)
 
-            <h1 class="text-2xl font-bold text-[#16213A]">
-                {{ $title }}
-            </h1>
+@section('content')
 
-            <p class="mt-1 text-sm text-slate-500">
-                Kelola data guru sekolah.
-            </p>
-        </div>
+    <x-page-header title="Daftar Guru" description="Daftar seluruh guru yang terdaftar di dalam sistem sekolah." />
 
+    <div class="mb-5 flex justify-end">
         <a href="{{ route('teachers.create') }}"
-            class="rounded-lg bg-[#16213A] px-4 py-2 text-sm font-medium text-white hover:bg-slate-700">
-            + Tambah Guru
+            class="bg-[#16213A] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">
+            Tambah Guru
         </a>
     </div>
 
+    <div class="border border-[#E5E3DB] bg-white">
 
-    <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+        <table class="w-full text-left text-sm">
 
-        <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm">
+            <thead>
+                <tr class="border-b border-[#16213A] text-[11px] uppercase tracking-[0.15em] text-[#16213A]">
+                    <th class="w-14 px-5 py-3.5">No.</th>
+                    <th class="px-5 py-3.5">NIP</th>
+                    <th class="px-5 py-3.5">Nama</th>
+                    <th class="px-5 py-3.5">Jenis Kelamin</th>
+                    <th class="px-5 py-3.5">Mata Pelajaran</th>
+                    <th class="px-5 py-3.5">Status</th>
+                    <th class="px-5 py-3.5 text-right">Tindakan</th>
+                </tr>
+            </thead>
 
-                <thead class="bg-slate-50 text-xs uppercase text-slate-500">
-                    <tr>
-                        <th class="px-6 py-4">No</th>
-                        <th class="px-6 py-4">NIP</th>
-                        <th class="px-6 py-4">Nama Guru</th>
-                        <th class="px-6 py-4">Email</th>
-                        <th class="px-6 py-4">No. Telepon</th>
-                        <th class="px-6 py-4 text-center">Aksi</th>
+            <tbody>
+
+                @foreach ($teachers as $teacher)
+
+                    <tr class="border-b border-[#EFEDE6] hover:bg-[#FAF9F5]">
+
+                        <td class="px-5 py-4 font-display text-lg text-[#A16207]">
+                            {{ $loop->iteration }}
+                        </td>
+
+                        <td class="px-5 py-4 font-mono text-xs text-slate-500">
+                            {{ $teacher['nip'] }}
+                        </td>
+
+                        <td class="px-5 py-4 font-medium text-[#16213A]">
+                            {{ $teacher['name'] }}
+                        </td>
+
+                        <td class="px-5 py-4 text-slate-600">
+                            {{ $teacher['gender'] }}
+                        </td>
+
+                        <td class="px-5 py-4 text-slate-600">
+                            {{ $teacher['subject'] }}
+                        </td>
+
+                        <td class="px-5 py-4">
+                            <x-status-badge :status="$teacher['status']" />
+                        </td>
+
+                        <td class="px-5 py-4">
+
+                            <div class="flex justify-end gap-4 text-xs font-medium">
+
+                                <a href="{{ route('teachers.show', $teacher['id']) }}"
+                                    class="text-[#16213A] hover:text-[#A16207]">
+                                    Lihat
+                                </a>
+
+                                <a href="{{ route('teachers.edit', $teacher['id']) }}"
+                                    class="text-[#16213A] hover:text-[#A16207]">
+                                    Ubah
+                                </a>
+
+                                <form action="{{ route('teachers.destroy', $teacher['id']) }}" method="POST"
+                                    onsubmit="return confirm('Hapus data guru ini?')">
+
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit" class="text-red-700 hover:text-red-900">
+                                        Hapus
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </td>
+
                     </tr>
-                </thead>
 
-                <tbody class="divide-y divide-slate-100">
+                @endforeach
 
-                    @forelse ($teachers as $teacher)
+            </tbody>
 
-                        <tr class="hover:bg-slate-50">
-
-                            <td class="px-6 py-4 text-slate-600">
-                                {{ $loop->iteration }}
-                            </td>
-
-                            <td class="px-6 py-4 font-medium text-[#16213A]">
-                                {{ $teacher['nip'] }}
-                            </td>
-
-                            <td class="px-6 py-4 text-slate-700">
-                                {{ $teacher['name'] }}
-                            </td>
-
-                            <td class="px-6 py-4 text-slate-600">
-                                {{ $teacher['email'] }}
-                            </td>
-
-                            <td class="px-6 py-4 text-slate-600">
-                                {{ $teacher['phone'] }}
-                            </td>
-
-                            <td class="px-6 py-4">
-                                <div class="flex items-center justify-center gap-2">
-
-                                    <a href="{{ route('teachers.show', $teacher['id']) }}"
-                                        class="rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-100">
-                                        Detail
-                                    </a>
-
-                                    <a href="{{ route('teachers.edit', $teacher['id']) }}"
-                                        class="rounded-lg border border-blue-200 px-3 py-1.5 text-xs font-medium text-blue-600 hover:bg-blue-50">
-                                        Edit
-                                    </a>
-
-                                    <form action="{{ route('teachers.destroy', $teacher['id']) }}" method="POST"
-                                        onsubmit="return confirm('Yakin ingin menghapus data guru ini?')">
-
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button type="submit"
-                                            class="rounded-lg border border-red-200 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-50">
-                                            Hapus
-                                        </button>
-
-                                    </form>
-
-                                </div>
-                            </td>
-
-                        </tr>
-
-                    @empty
-
-                        <tr>
-                            <td colspan="6" class="px-6 py-10 text-center text-sm text-slate-400">
-                                Belum ada data guru.
-                            </td>
-                        </tr>
-
-                    @endforelse
-
-                </tbody>
-
-            </table>
-        </div>
+        </table>
 
     </div>
 
-</x-layouts.app>
+@endsection

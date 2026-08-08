@@ -4,79 +4,87 @@
 
 @section('content')
 
-    <x-page-header eyebrow="Sistem Sekolah" title="Daftar Siswa"
-        description="Daftar seluruh siswa yang terdaftar di sekolah." :breadcrumbs="['Buku Induk', 'Daftar Siswa']" />
+    <x-page-header :title="$title" description="Daftar siswa yang terdaftar dalam sistem sekolah." />
 
-    <div class="mb-5 flex justify-end">
+    <div class="mt-6 flex justify-end">
         <a href="{{ route('students.create') }}"
-            class="bg-[#16213A] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#26324f]">
-            Catat Siswa Baru
+            class="bg-[#16213A] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">
+            Tambah Siswa
         </a>
     </div>
 
-    <div class="border border-[#E5E3DB] bg-white">
+    <div class="mt-4 overflow-hidden border border-[#E5E3DB] bg-white">
+
         <table class="w-full text-left text-sm">
-            <thead>
-                <tr class="border-b border-[#E5E3DB] text-[11px] uppercase tracking-[0.15em] text-[#16213A]">
-                    <th class="px-5 py-4">No.</th>
-                    <th class="px-5 py-4">NIS</th>
-                    <th class="px-5 py-4">Nama Siswa</th>
-                    <th class="px-5 py-4">Jenis Kelamin</th>
-                    <th class="px-5 py-4">Jurusan</th>
-                    <th class="px-5 py-4">Kelas</th>
-                    <th class="px-5 py-4 text-right">Tindakan</th>
+
+            <thead class="border-b border-[#E5E3DB] bg-[#FCFBF8]">
+                <tr>
+                    <th class="px-6 py-4 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">
+                        NIS
+                    </th>
+
+                    <th class="px-6 py-4 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">
+                        Nama Lengkap
+                    </th>
+
+                    <th class="px-6 py-4 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">
+                        Jurusan
+                    </th>
+
+                    <th class="px-6 py-4 text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">
+                        Kelas
+                    </th>
+
+                    <th class="px-6 py-4 text-right text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">
+                        Aksi
+                    </th>
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="divide-y divide-[#EFEDE6]">
+
                 @foreach ($students as $student)
-                    <tr class="border-b border-[#EFEDE6] hover:bg-[#FAF9F5]">
+                    <tr class="transition hover:bg-[#FCFBF8]">
 
-                        <td class="px-5 py-4 font-display text-lg text-[#A16207]">
-                            {{ $loop->iteration }}
-                        </td>
-
-                        <td class="px-5 py-4 font-mono text-xs text-slate-500">
+                        <td class="px-6 py-4 font-mono text-xs text-slate-500">
                             {{ $student['nis'] }}
                         </td>
 
-                        <td class="px-5 py-4 font-semibold text-[#16213A]">
+                        <td class="px-6 py-4 font-medium text-[#16213A]">
                             {{ $student['name'] }}
                         </td>
 
-                        <td class="px-5 py-4 text-[#16213A]">
-                            {{ $student['gender'] }}
-                        </td>
-
-                        <td class="px-5 py-4 text-[#16213A]">
+                        <td class="px-6 py-4 text-slate-600">
                             {{ $student['major'] }}
                         </td>
 
-                        <td class="px-5 py-4 text-[#16213A]">
+                        <td class="px-6 py-4 text-slate-600">
                             {{ $student['class'] }}
                         </td>
 
-                        <td class="px-5 py-4">
-                            <div class="flex justify-end gap-4 text-xs font-medium">
+                        <td class="px-6 py-4">
+                            <div class="flex justify-end gap-3">
 
-                                <a href="{{ route('students.show', ['id' => $student['id']]) }}"
-                                    class="text-[#16213A] hover:text-[#A16207]">
+                                <a href="{{ route('students.show', $student['id']) }}"
+                                    class="text-sm font-medium text-[#16213A] hover:underline">
                                     Lihat
                                 </a>
 
-                                <a href="{{ route('students.edit', ['id' => $student['id']]) }}"
-                                    class="text-[#16213A] hover:text-[#A16207]">
+                                <a href="{{ route('students.edit', $student['id']) }}"
+                                    class="text-sm font-medium text-[#A16207] hover:underline">
                                     Ubah
                                 </a>
 
-                                <form action="{{ route('students.destroy', ['id' => $student['id']]) }}" method="POST"
-                                    onsubmit="return confirm('Hapus data siswa ini dari buku induk?')">
+                                <form action="{{ route('students.destroy', $student['id']) }}" method="POST"
+                                    onsubmit="return confirm('Hapus data siswa ini?')">
+
                                     @csrf
                                     @method('DELETE')
 
-                                    <button type="submit" class="text-red-700 hover:text-red-900">
+                                    <button type="submit" class="text-sm font-medium text-red-700 hover:underline">
                                         Hapus
                                     </button>
+
                                 </form>
 
                             </div>
@@ -84,8 +92,11 @@
 
                     </tr>
                 @endforeach
+
             </tbody>
+
         </table>
+
     </div>
 
 @endsection

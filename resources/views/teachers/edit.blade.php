@@ -1,91 +1,105 @@
-<x-layouts.app :title="$title">
+@extends('layouts.app')
 
-    <div class="mb-6">
-        <div class="mb-2 flex items-center gap-2 text-xs text-slate-400">
-            <a href="{{ route('teachers.index') }}" class="hover:text-[#16213A]">
-                Guru
-            </a>
-            <span>→</span>
-            <span>Edit</span>
+@section('title', $title)
+
+@section('content')
+
+    <x-page-header title="Ubah Data Guru" description="Perbarui informasi guru yang tersimpan di dalam sistem sekolah." />
+
+    <form action="{{ route('teachers.update', $teacher['id']) }}" method="POST"
+        class="space-y-6 border border-[#E5E3DB] bg-white p-8">
+
+        @csrf
+        @method('PUT')
+
+        <div>
+            <label for="nip" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
+                NIP
+            </label>
+
+            <input type="text" id="nip" name="nip" value="{{ $teacher['nip'] }}"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
         </div>
 
-        <h1 class="text-2xl font-bold text-[#16213A]">
-            {{ $title }}
-        </h1>
+        <div>
+            <label for="name" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
+                Nama Lengkap
+            </label>
 
-        <p class="mt-1 text-sm text-slate-500">
-            Ubah informasi data guru.
-        </p>
-    </div>
+            <input type="text" id="name" name="name" value="{{ $teacher['name'] }}"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+        </div>
 
+        <div>
+            <label for="gender" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
+                Jenis Kelamin
+            </label>
 
-    <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+            <select id="gender" name="gender"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
 
-        <form action="{{ route('teachers.update', $teacher['id']) }}" method="POST">
+                <option value="Laki-Laki" {{ $teacher['gender'] == 'Laki-Laki' ? 'selected' : '' }}>
+                    Laki-Laki
+                </option>
 
-            @csrf
-            @method('PUT')
+                <option value="Perempuan" {{ $teacher['gender'] == 'Perempuan' ? 'selected' : '' }}>
+                    Perempuan
+                </option>
 
-            <div class="grid gap-5 md:grid-cols-2">
+            </select>
+        </div>
 
-                <div>
-                    <label class="mb-2 block text-sm font-medium text-slate-700">
-                        NIP
-                    </label>
+        <div>
+            <label for="subject" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
+                Mata Pelajaran
+            </label>
 
-                    <input type="text" name="nip" value="{{ $teacher['nip'] }}"
-                        class="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm outline-none focus:border-[#16213A]">
-                </div>
+            <input type="text" id="subject" name="subject" value="{{ $teacher['subject'] }}"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+        </div>
 
+        <div>
+            <label for="phone_number" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
+                Nomor Telepon
+            </label>
 
-                <div>
-                    <label class="mb-2 block text-sm font-medium text-slate-700">
-                        Nama Guru
-                    </label>
+            <input type="text" id="phone_number" name="phone_number" value="{{ $teacher['phone_number'] }}"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+        </div>
 
-                    <input type="text" name="name" value="{{ $teacher['name'] }}"
-                        class="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm outline-none focus:border-[#16213A]">
-                </div>
+        <div>
+            <label for="status" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
+                Status
+            </label>
 
+            <select id="status" name="status"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
 
-                <div>
-                    <label class="mb-2 block text-sm font-medium text-slate-700">
-                        Email
-                    </label>
+                <option value="Aktif" {{ $teacher['status'] == 'Aktif' ? 'selected' : '' }}>
+                    Aktif
+                </option>
 
-                    <input type="email" name="email" value="{{ $teacher['email'] }}"
-                        class="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm outline-none focus:border-[#16213A]">
-                </div>
+                <option value="Tidak Aktif" {{ $teacher['status'] == 'Tidak Aktif' ? 'selected' : '' }}>
+                    Tidak Aktif
+                </option>
 
+            </select>
+        </div>
 
-                <div>
-                    <label class="mb-2 block text-sm font-medium text-slate-700">
-                        No. Telepon
-                    </label>
+        <div class="flex justify-end gap-4 border-t border-[#EFEDE6] pt-6">
 
-                    <input type="text" name="phone" value="{{ $teacher['phone'] }}"
-                        class="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm outline-none focus:border-[#16213A]">
-                </div>
+            <a href="{{ route('teachers.index') }}"
+                class="px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-[#16213A]">
+                Batal
+            </a>
 
-            </div>
+            <button type="submit"
+                class="bg-[#16213A] px-6 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">
+                Perbarui Data Guru
+            </button>
 
+        </div>
 
-            <div class="mt-6 flex justify-end gap-3">
+    </form>
 
-                <a href="{{ route('teachers.index') }}"
-                    class="rounded-lg border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50">
-                    Batal
-                </a>
-
-                <button type="submit"
-                    class="rounded-lg bg-[#16213A] px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-700">
-                    Simpan Perubahan
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-</x-layouts.app>
+@endsection

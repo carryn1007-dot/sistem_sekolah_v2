@@ -4,9 +4,9 @@
 
 @section('content')
 
-    <x-page-header title="Catat Siswa Baru" description="Tambahkan data siswa baru ke dalam buku induk sekolah." />
+    <x-page-header :title="$title" description="Tambahkan data siswa baru ke dalam buku induk." />
 
-    <form action="{{ route('students.store') }}" method="POST" class="space-y-6 border border-[#E5E3DB] bg-white p-8">
+    <form action="{{ route('students.store') }}" method="POST" class="mt-6 space-y-6 border border-[#E5E3DB] bg-white p-8">
 
         @csrf
 
@@ -15,7 +15,7 @@
                 NIS
             </label>
 
-            <input type="text" id="nis" name="nis" placeholder="Contoh: 2024010"
+            <input type="text" id="nis" name="nis" placeholder="Contoh: 1003"
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm placeholder:text-slate-400 focus:border-[#A16207] focus:bg-white focus:outline-none">
         </div>
 
@@ -26,21 +26,6 @@
 
             <input type="text" id="name" name="name" placeholder="Nama lengkap siswa"
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm placeholder:text-slate-400 focus:border-[#A16207] focus:bg-white focus:outline-none">
-        </div>
-
-        <div>
-            <label for="gender" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
-                Jenis Kelamin
-            </label>
-
-            <select id="gender" name="gender"
-                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
-
-                <option value="">Pilih jenis kelamin</option>
-                <option value="Laki-laki">Laki-laki</option>
-                <option value="Perempuan">Perempuan</option>
-
-            </select>
         </div>
 
         <div>
@@ -64,7 +49,7 @@
                 Kelas
             </label>
 
-            <input type="text" id="class" name="class" placeholder="Contoh: X AKL 1"
+            <input type="text" id="class" name="class" placeholder="Contoh: XII TKJ 1"
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm placeholder:text-slate-400 focus:border-[#A16207] focus:bg-white focus:outline-none">
         </div>
 

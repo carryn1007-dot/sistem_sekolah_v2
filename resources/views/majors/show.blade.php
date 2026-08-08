@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <x-page-header title="Detail Jurusan" description="Informasi lengkap program keahlian yang tersedia di sekolah." />
+    <x-page-header title="Detail Jurusan" description="Informasi lengkap mengenai jurusan yang terdaftar di sekolah." />
 
     <div class="mt-3 border border-[#E5E3DB] bg-white">
 
@@ -21,7 +21,7 @@
                 </h1>
 
                 <p class="mt-1 font-mono text-xs text-slate-500">
-                    Kode {{ $major['code'] }}
+                    {{ $major['code'] }}
                 </p>
 
             </div>

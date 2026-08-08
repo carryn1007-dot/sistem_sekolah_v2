@@ -6,62 +6,59 @@ use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
-    private function teachers()
+    public function teachers()
     {
         return [
             [
                 'id' => 1,
+                'nip' => '198501012024',
                 'name' => 'Budi Santoso',
-                'nip' => '198501012010011001',
-                'email' => 'budi@sekolah.sch.id',
-                'phone' => '081234567890',
+                'gender' => 'Laki-Laki',
+                'subject' => 'Akuntansi Dasar',
+                'phone_number' => '081234560001',
+                'status' => 'Aktif',
             ],
             [
                 'id' => 2,
+                'nip' => '198703152024',
                 'name' => 'Siti Aminah',
-                'nip' => '198702152012022002',
-                'email' => 'siti@sekolah.sch.id',
-                'phone' => '081234567891',
-            ],
-            [
-                'id' => 3,
-                'name' => 'Andi Wijaya',
-                'nip' => '198903202014031003',
-                'email' => 'andi@sekolah.sch.id',
-                'phone' => '081234567892',
+                'gender' => 'Perempuan',
+                'subject' => 'Jaringan Komputer',
+                'phone_number' => '081234560002',
+                'status' => 'Aktif',
             ],
         ];
     }
 
     public function index()
     {
-        $title = 'Daftar Guru';
+        $title = 'Sistem Sekolah - Daftar Guru';
 
         $teachers = $this->teachers();
 
         return view('teachers.index', [
             'title' => $title,
-            'teachers' => $teachers
+            'teachers' => $teachers,
         ]);
     }
 
     public function create()
     {
-        $title = 'Tambah Guru';
+        $title = 'Sistem Sekolah - Tambah Guru';
 
         return view('teachers.create', [
-            'title' => $title
+            'title' => $title,
         ]);
     }
 
     public function store(Request $request)
     {
-        return "Menambah data guru baru";
+        return 'Menambah data guru baru';
     }
 
     public function show(string $id)
     {
-        $title = 'Detail Guru';
+        $title = 'Sistem Sekolah - Detail Guru';
 
         $teachers = $this->teachers();
 
@@ -74,13 +71,13 @@ class TeacherController extends Controller
 
         return view('teachers.show', [
             'title' => $title,
-            'teacher' => $teacher
+            'teacher' => $teacher,
         ]);
     }
 
     public function edit(string $id)
     {
-        $title = 'Ubah Data Guru';
+        $title = 'Sistem Sekolah - Ubah Data Guru';
 
         $teachers = $this->teachers();
 
@@ -93,7 +90,7 @@ class TeacherController extends Controller
 
         return view('teachers.edit', [
             'title' => $title,
-            'teacher' => $teacher
+            'teacher' => $teacher,
         ]);
     }
 

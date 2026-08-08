@@ -1,88 +1,139 @@
-<x-layouts.app :title="$title">
+@extends('layouts.app')
 
-    <div class="mb-6">
-        <div class="mb-2 flex items-center gap-2 text-xs text-slate-400">
-            <a href="{{ route('teachers.index') }}" class="hover:text-[#16213A]">
-                Guru
-            </a>
-            <span>→</span>
-            <span>Detail</span>
-        </div>
+@section('title', $title)
 
-        <h1 class="text-2xl font-bold text-[#16213A]">
-            {{ $title }}
-        </h1>
+@section('content')
 
-        <p class="mt-1 text-sm text-slate-500">
-            Informasi lengkap guru.
-        </p>
-    </div>
+    <x-page-header title="Detail Guru"
+        description="Informasi lengkap mengenai guru yang terdaftar di dalam sistem sekolah." />
 
+    <div class="mt-3 border border-[#E5E3DB] bg-white">
 
-    <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-
-        <div class="grid gap-6 md:grid-cols-2">
+        <div class="flex items-start justify-between border-b border-[#E5E3DB] bg-[#FCFBF8] px-8 py-6">
 
             <div>
-                <p class="text-xs font-medium uppercase text-slate-400">
-                    NIP
+
+                <p class="mb-1 text-[11px] uppercase tracking-[0.2em] text-[#A16207]">
+                    Data Guru
                 </p>
 
-                <p class="mt-1 text-sm font-medium text-[#16213A]">
-                    {{ $teacher['nip'] }}
-                </p>
-            </div>
-
-
-            <div>
-                <p class="text-xs font-medium uppercase text-slate-400">
-                    Nama Guru
-                </p>
-
-                <p class="mt-1 text-sm font-medium text-[#16213A]">
+                <h1 class="font-display text-3xl font-semibold text-[#16213A]">
                     {{ $teacher['name'] }}
+                </h1>
+
+                <p class="mt-1 font-mono text-xs text-slate-500">
+                    NIP {{ $teacher['nip'] }}
                 </p>
+
             </div>
 
-
-            <div>
-                <p class="text-xs font-medium uppercase text-slate-400">
-                    Email
-                </p>
-
-                <p class="mt-1 text-sm text-slate-600">
-                    {{ $teacher['email'] }}
-                </p>
-            </div>
-
-
-            <div>
-                <p class="text-xs font-medium uppercase text-slate-400">
-                    No. Telepon
-                </p>
-
-                <p class="mt-1 text-sm text-slate-600">
-                    {{ $teacher['phone'] }}
-                </p>
-            </div>
+            <x-status-badge :status="$teacher['status']" />
 
         </div>
 
+        <dl class="divide-y divide-[#EFEDE6] text-sm">
 
-        <div class="mt-8 flex justify-end gap-3">
+            <div class="flex justify-between px-8 py-4">
+
+                <dt class="text-xs uppercase tracking-[0.1em] text-slate-400">
+                    NIP
+                </dt>
+
+                <dd class="font-medium text-[#16213A]">
+                    {{ $teacher['nip'] }}
+                </dd>
+
+            </div>
+
+            <div class="flex justify-between px-8 py-4">
+
+                <dt class="text-xs uppercase tracking-[0.1em] text-slate-400">
+                    Nama Lengkap
+                </dt>
+
+                <dd class="font-medium text-[#16213A]">
+                    {{ $teacher['name'] }}
+                </dd>
+
+            </div>
+
+            <div class="flex justify-between px-8 py-4">
+
+                <dt class="text-xs uppercase tracking-[0.1em] text-slate-400">
+                    Jenis Kelamin
+                </dt>
+
+                <dd class="font-medium text-[#16213A]">
+                    {{ $teacher['gender'] }}
+                </dd>
+
+            </div>
+
+            <div class="flex justify-between px-8 py-4">
+
+                <dt class="text-xs uppercase tracking-[0.1em] text-slate-400">
+                    Mata Pelajaran
+                </dt>
+
+                <dd class="font-medium text-[#16213A]">
+                    {{ $teacher['subject'] }}
+                </dd>
+
+            </div>
+
+            <div class="flex justify-between px-8 py-4">
+
+                <dt class="text-xs uppercase tracking-[0.1em] text-slate-400">
+                    Nomor Telepon
+                </dt>
+
+                <dd class="font-medium text-[#16213A]">
+                    {{ $teacher['phone_number'] }}
+                </dd>
+
+            </div>
+
+            <div class="flex justify-between px-8 py-4">
+
+                <dt class="text-xs uppercase tracking-[0.1em] text-slate-400">
+                    Status
+                </dt>
+
+                <dd>
+                    <x-status-badge :status="$teacher['status']" />
+                </dd>
+
+            </div>
+
+        </dl>
+
+        <div class="flex justify-end gap-4 border-t border-[#E5E3DB] px-8 py-5">
 
             <a href="{{ route('teachers.index') }}"
-                class="rounded-lg border border-slate-200 px-4 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-50">
+                class="px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-[#16213A]">
                 Kembali
             </a>
 
             <a href="{{ route('teachers.edit', $teacher['id']) }}"
-                class="rounded-lg bg-[#16213A] px-4 py-2.5 text-sm font-medium text-white hover:bg-slate-700">
-                Edit Data
+                class="bg-[#16213A] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">
+                Ubah
             </a>
+
+            <form action="{{ route('teachers.destroy', $teacher['id']) }}" method="POST"
+                onsubmit="return confirm('Hapus data guru ini?')">
+
+                @csrf
+                @method('DELETE')
+
+                <button type="submit"
+                    class="border border-red-200 px-5 py-2.5 text-sm font-medium text-red-700 transition hover:bg-red-50">
+                    Hapus
+                </button>
+
+            </form>
 
         </div>
 
     </div>
 
-</x-layouts.app>
+@endsection
