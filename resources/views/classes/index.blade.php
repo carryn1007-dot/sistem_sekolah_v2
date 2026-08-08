@@ -4,12 +4,12 @@
 
 @section('content')
 
-    <x-page-header title="Daftar Jurusan" description="Daftar seluruh program keahlian yang tersedia di sekolah." />
+    <x-page-header title="Daftar Kelas" description="Daftar seluruh kelas yang tersedia di sekolah." />
 
     <div class="mb-5 flex justify-end">
-        <a href="{{ route('majors.create') }}"
+        <a href="{{ route('classes.create') }}"
             class="bg-[#16213A] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">
-            Tambah Jurusan
+            Tambah Kelas
         </a>
     </div>
 
@@ -19,19 +19,18 @@
 
             <thead>
                 <tr class="border-b border-[#16213A] text-[11px] uppercase tracking-[0.15em] text-[#16213A]">
-
                     <th class="w-14 px-5 py-3.5">No.</th>
-                    <th class="px-5 py-3.5">Kode</th>
-                    <th class="px-5 py-3.5">Nama Jurusan</th>
-                    <th class="px-5 py-3.5">Deskripsi</th>
+                    <th class="px-5 py-3.5">Nama Kelas</th>
+                    <th class="px-5 py-3.5">Tingkat</th>
+                    <th class="px-5 py-3.5">Jurusan</th>
+                    <th class="px-5 py-3.5">Wali Kelas</th>
                     <th class="px-5 py-3.5 text-right">Tindakan</th>
-
                 </tr>
             </thead>
 
             <tbody>
 
-                @foreach ($majors as $major)
+                @foreach ($classes as $class)
 
                     <tr class="border-b border-[#EFEDE6] hover:bg-[#FAF9F5]">
 
@@ -39,32 +38,36 @@
                             {{ $loop->iteration }}
                         </td>
 
-                        <td class="px-5 py-4 font-mono text-xs font-semibold text-slate-500">
-                            {{ $major['code'] }}
-                        </td>
-
                         <td class="px-5 py-4 font-medium text-[#16213A]">
-                            {{ $major['name'] }}
+                            {{ $class['name'] }}
                         </td>
 
-                        <td class="max-w-md px-5 py-4 text-slate-500">
-                            {{ $major['description'] }}
+                        <td class="px-5 py-4 text-[#16213A]">
+                            {{ $class['grade'] }}
+                        </td>
+
+                        <td class="px-5 py-4 text-[#16213A]">
+                            {{ $class['major'] }}
+                        </td>
+
+                        <td class="px-5 py-4 text-[#16213A]">
+                            {{ $class['homeroom_teacher'] }}
                         </td>
 
                         <td class="px-5 py-4">
 
                             <div class="flex justify-end gap-4 text-xs font-medium">
 
-                                <a href="{{ route('majors.show', $major['id']) }}" class="text-[#16213A] hover:text-[#A16207]">
+                                <a href="{{ route('classes.show', $class['id']) }}" class="text-[#16213A] hover:text-[#A16207]">
                                     Lihat
                                 </a>
 
-                                <a href="{{ route('majors.edit', $major['id']) }}" class="text-[#16213A] hover:text-[#A16207]">
+                                <a href="{{ route('classes.edit', $class['id']) }}" class="text-[#16213A] hover:text-[#A16207]">
                                     Ubah
                                 </a>
 
-                                <form action="{{ route('majors.destroy', $major['id']) }}" method="POST"
-                                    onsubmit="return confirm('Hapus data jurusan ini?')">
+                                <form action="{{ route('classes.destroy', $class['id']) }}" method="POST"
+                                    onsubmit="return confirm('Hapus data kelas ini?')">
 
                                     @csrf
                                     @method('DELETE')

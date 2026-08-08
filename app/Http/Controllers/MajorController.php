@@ -6,11 +6,9 @@ use Illuminate\Http\Request;
 
 class MajorController extends Controller
 {
-    public function index()
+    private function majors()
     {
-        $title = "Sistem Sekolah - Daftar Jurusan";
-
-        $majors = [
+        return [
             [
                 'id' => 1,
                 'code' => 'AKL',
@@ -30,37 +28,77 @@ class MajorController extends Controller
                 'description' => 'Program keahlian yang membekali murid dengan kompetensi pemasaran dan pengelolaan bisnis berbasis digital.',
             ],
         ];
+    }
 
-        return view('majors.index', compact('title', 'majors'));
+    public function index()
+    {
+        $title = 'Sistem Sekolah - Daftar Jurusan';
+
+        $majors = $this->majors();
+
+        return view('majors.index', [
+            'title' => $title,
+            'majors' => $majors,
+        ]);
     }
 
     public function create()
     {
-        return 'Menampilkan halaman tambah jurusan';
+        $title = 'Sistem Sekolah - Tambah Jurusan';
+
+        return view('majors.create', [
+            'title' => $title,
+        ]);
     }
 
     public function store(Request $request)
     {
-        return 'Melakukan penambahan data jurusan';
+        return 'Menambah data jurusan baru';
     }
 
-    public function show($id)
+    public function show(string $id)
     {
-        return "Menampilkan jurusan dengan ID: {$id}";
+        $title = 'Sistem Sekolah - Detail Jurusan';
+
+        $majors = $this->majors();
+
+        $major = collect($majors)->firstWhere('id', (int) $id);
+
+        if (!$major) {
+            abort(404);
+        }
+
+        return view('majors.show', [
+            'title' => $title,
+            'major' => $major,
+        ]);
     }
 
-    public function edit($id)
+    public function edit(string $id)
     {
-        return "Menampilkan halaman edit jurusan";
+        $title = 'Sistem Sekolah - Edit Jurusan';
+
+        $majors = $this->majors();
+
+        $major = collect($majors)->firstWhere('id', (int) $id);
+
+        if (!$major) {
+            abort(404);
+        }
+
+        return view('majors.edit', [
+            'title' => $title,
+            'major' => $major,
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
-        return "Melakukan perubahan data jurusan";
+        return "Mengubah data jurusan dengan ID: {$id}";
     }
 
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        return "Menghapus data jurusan";
+        return "Menghapus data jurusan dengan ID: {$id}";
     }
 }

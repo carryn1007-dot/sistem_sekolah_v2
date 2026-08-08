@@ -6,39 +6,45 @@ use Illuminate\Http\Request;
 
 class StudentController extends Controller
 {
+    private function students()
+    {
+        return [
+            [
+                'id' => 1,
+                'nis' => '2024001',
+                'name' => 'Budi Ariyanto',
+                'gender' => 'Laki-laki',
+                'major' => 'AKL',
+                'class' => 'XII AKL 1',
+            ],
+            [
+                'id' => 2,
+                'nis' => '2024002',
+                'name' => 'Siti Aminah',
+                'gender' => 'Perempuan',
+                'major' => 'TKJ',
+                'class' => 'XII TKJ 1',
+            ],
+        ];
+    }
 
-public function index()
-{
-    $title = 'Sistem Sekolah - Daftar Kelas';
+    public function index()
+    {
+        $title = 'Sistem Sekolah - Daftar Siswa';
 
-    $classes = [
-        [
-            'id' => 1,
-            'name' => 'XII AKL 1',
-            'grade' => 'XII',
-            'major' => 'AKL',
-            'homeroom_teacher' => 'Budi Santoso',
-        ],
-        [
-            'id' => 2,
-            'name' => 'XII TKJ 1',
-            'grade' => 'XII',
-            'major' => 'TKJ',
-            'homeroom_teacher' => 'Siti Aminah',
-        ],
-    ];
+        $students = $this->students();
 
-    return view('schoolclasses.index', [
-        'title' => $title,
-        'classes' => $classes,
-    ]);
-}
+        return view('students.index', [
+            'title' => $title,
+            'students' => $students
+        ]);
+    }
 
     public function create()
     {
-        $title = "Sistem Sekolah - Tambah Siswa";
+        $title = 'Sistem Sekolah - Catat Siswa Baru';
 
-            return view('students.create', [
+        return view('students.create', [
             'title' => $title
         ]);
     }
@@ -50,19 +56,37 @@ public function index()
 
     public function show(string $id)
     {
-        $title = "Sistem Sekolah - Detail Siswa";
+        $title = 'Sistem Sekolah - Detail Siswa';
 
-            return view('students.show', [
-            'title' => $title
+        $students = $this->students();
+
+        $student = collect($students)->firstWhere('id', (int) $id);
+
+        if (!$student) {
+            abort(404);
+        }
+
+        return view('students.show', [
+            'title' => $title,
+            'student' => $student
         ]);
     }
 
     public function edit(string $id)
     {
-        $title = "Sistem Sekolah - Edit Siswa";
-        
-            return view('students.edit', [
-            'title' => $title
+        $title = 'Sistem Sekolah - Ubah Data Siswa';
+
+        $students = $this->students();
+
+        $student = collect($students)->firstWhere('id', (int) $id);
+
+        if (!$student) {
+            abort(404);
+        }
+
+        return view('students.edit', [
+            'title' => $title,
+            'student' => $student
         ]);
     }
 

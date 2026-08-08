@@ -6,62 +6,103 @@ use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
+    private function teachers()
+    {
+        return [
+            [
+                'id' => 1,
+                'name' => 'Budi Santoso',
+                'nip' => '198501012010011001',
+                'email' => 'budi@sekolah.sch.id',
+                'phone' => '081234567890',
+            ],
+            [
+                'id' => 2,
+                'name' => 'Siti Aminah',
+                'nip' => '198702152012022002',
+                'email' => 'siti@sekolah.sch.id',
+                'phone' => '081234567891',
+            ],
+            [
+                'id' => 3,
+                'name' => 'Andi Wijaya',
+                'nip' => '198903202014031003',
+                'email' => 'andi@sekolah.sch.id',
+                'phone' => '081234567892',
+            ],
+        ];
+    }
+
     public function index()
     {
-        $title = "Sistem Sekolah - Daftar Guru";
-        $teachers = [
-        [
-            'id' => 1,
-            'nip' => '198501012024',
-            'name' => 'Budi Santoso',
-            'gender' => 'Laki-Laki',
-            'subject' => 'Akuntansi Dasar',
-            'phone' => '081234560001',
-            'status' => 'Aktif',
-        ],
-        [
-            'id' => 2,
-            'nip' => '198703152024',
-            'name' => 'Siti Aminah',
-            'gender' => 'Perempuan',
-            'subject' => 'Jaringan Komputer',
-            'phone' => '081234560002',
-            'status' => 'Aktif',
-        ]
-];
+        $title = 'Daftar Guru';
+
+        $teachers = $this->teachers();
+
         return view('teachers.index', [
             'title' => $title,
             'teachers' => $teachers
         ]);
-
     }
 
     public function create()
     {
-        return 'Menampilkan halaman tambah guru';
+        $title = 'Tambah Guru';
+
+        return view('teachers.create', [
+            'title' => $title
+        ]);
     }
 
     public function store(Request $request)
     {
-        return 'Melakukan penambahan data guru';
+        return "Menambah data guru baru";
     }
 
-    public function show($id)
+    public function show(string $id)
     {
-        return "Menampilkan guru dengan ID: {$id}";
+        $title = 'Detail Guru';
+
+        $teachers = $this->teachers();
+
+        $teacher = collect($teachers)
+            ->firstWhere('id', (int) $id);
+
+        if (!$teacher) {
+            abort(404);
+        }
+
+        return view('teachers.show', [
+            'title' => $title,
+            'teacher' => $teacher
+        ]);
     }
 
-    public function edit($id)
+    public function edit(string $id)
     {
-        return "Menampilkan halaman edit guru dengan ID: {$id}";
+        $title = 'Ubah Data Guru';
+
+        $teachers = $this->teachers();
+
+        $teacher = collect($teachers)
+            ->firstWhere('id', (int) $id);
+
+        if (!$teacher) {
+            abort(404);
+        }
+
+        return view('teachers.edit', [
+            'title' => $title,
+            'teacher' => $teacher
+        ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
-        return "Melakukan perubahan data guru dengan ID: {$id}";
+        return "Mengubah data guru dengan ID: {$id}";
     }
 
-    public function destroy($id)
+    public function destroy(string $id)
     {
         return "Menghapus data guru dengan ID: {$id}";
     }
