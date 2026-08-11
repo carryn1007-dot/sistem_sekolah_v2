@@ -20,7 +20,7 @@
                 </h1>
 
                 <p class="mt-1 text-sm text-slate-500">
-                    {{ $class['major'] }} · {{ $class['grade'] }}
+                    {{ $class['major_id'] }} · {{ $class['grade'] }}
                 </p>
             </div>
 
@@ -59,7 +59,7 @@
                 </dt>
 
                 <dd class="font-medium text-[#16213A]">
-                    {{ $class['major'] }}
+                    {{ $class['major_id'] }}
                 </dd>
             </div>
 
@@ -69,7 +69,7 @@
                 </dt>
 
                 <dd class="font-medium text-[#16213A]">
-                    {{ $class['homeroom_teacher'] }}
+                    {{ $class['teacher_id'] }}
                 </dd>
             </div>
 

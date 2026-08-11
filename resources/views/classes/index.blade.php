@@ -66,11 +66,11 @@
                         </td>
 
                         <td class="px-6 py-4 text-sm text-slate-600">
-                            {{ $class['major'] }}
+                            {{ $class['major_id'] }}
                         </td>
 
                         <td class="px-6 py-4 text-sm text-slate-600">
-                            {{ $class['homeroom_teacher'] }}
+                            {{ $class['teacher_id'] }}
                         </td>
 
                         <td class="px-6 py-4">

@@ -12,6 +12,7 @@
         @csrf
         @method('PUT')
 
+        {{-- Nama Kelas --}}
         <div>
             <label for="name" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
                 Nama Kelas
@@ -21,6 +22,7 @@
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
         </div>
 
+        {{-- Tingkat --}}
         <div>
             <label for="grade" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
                 Tingkat
@@ -28,7 +30,6 @@
 
             <select id="grade" name="grade"
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
-
                 <option value="X" {{ $class['grade'] === 'X' ? 'selected' : '' }}>
                     X
                 </option>
@@ -40,10 +41,10 @@
                 <option value="XII" {{ $class['grade'] === 'XII' ? 'selected' : '' }}>
                     XII
                 </option>
-
             </select>
         </div>
 
+        {{-- Jurusan --}}
         <div>
             <label for="major_id" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
                 Jurusan
@@ -51,16 +52,15 @@
 
             <select id="major_id" name="major_id"
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
-
                 @foreach ($majors as $major)
-                    <option value="{{ $major['id'] }}" {{ $class['major'] === $major['code'] ? 'selected' : '' }}>
+                    <option value="{{ $major['id'] }}" {{ $class['major_id'] == $major['id'] ? 'selected' : '' }}>
                         {{ $major['code'] }} - {{ $major['name'] }}
                     </option>
                 @endforeach
-
             </select>
         </div>
 
+        {{-- Wali Kelas --}}
         <div>
             <label for="teacher_id" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
                 Wali Kelas
@@ -68,16 +68,15 @@
 
             <select id="teacher_id" name="teacher_id"
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
-
                 @foreach ($teachers as $teacher)
-                    <option value="{{ $teacher['id'] }}" {{ $class['homeroom_teacher'] === $teacher['name'] ? 'selected' : '' }}>
+                    <option value="{{ $teacher['id'] }}" {{ $class['teacher_id'] == $teacher['id'] ? 'selected' : '' }}>
                         {{ $teacher['name'] }}
                     </option>
                 @endforeach
-
             </select>
         </div>
 
+        {{-- Tombol --}}
         <div class="flex justify-end gap-4 border-t border-[#EFEDE6] pt-6">
 
             <a href="{{ route('classes.show', $class['id']) }}"
