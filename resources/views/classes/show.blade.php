@@ -4,14 +4,13 @@
 
 @section('content')
 
-    <x-page-header title="Detail Kelas" description="Informasi lengkap mengenai kelas yang terdaftar di sekolah." />
+    <x-page-header :title="$title" description="Detail kelas yang terdaftar dalam sistem sekolah." />
 
-    <div class="mt-3 border border-[#E5E3DB] bg-white">
+    <div class="mt-6 border border-[#E5E3DB] bg-white">
 
         <div class="flex items-start justify-between border-b border-[#E5E3DB] bg-[#FCFBF8] px-8 py-6">
 
             <div>
-
                 <p class="mb-1 text-[11px] uppercase tracking-[0.2em] text-[#A16207]">
                     Data Kelas
                 </p>
@@ -20,10 +19,9 @@
                     {{ $class['name'] }}
                 </h1>
 
-                <p class="mt-1 font-mono text-xs text-slate-500">
+                <p class="mt-1 text-sm text-slate-500">
                     {{ $class['major'] }} · {{ $class['grade'] }}
                 </p>
-
             </div>
 
             <a href="{{ route('classes.edit', $class['id']) }}"
@@ -36,7 +34,6 @@
         <dl class="divide-y divide-[#EFEDE6] text-sm">
 
             <div class="flex justify-between px-8 py-4">
-
                 <dt class="text-xs uppercase tracking-[0.1em] text-slate-400">
                     Nama Kelas
                 </dt>
@@ -44,11 +41,9 @@
                 <dd class="font-medium text-[#16213A]">
                     {{ $class['name'] }}
                 </dd>
-
             </div>
 
             <div class="flex justify-between px-8 py-4">
-
                 <dt class="text-xs uppercase tracking-[0.1em] text-slate-400">
                     Tingkat
                 </dt>
@@ -56,11 +51,9 @@
                 <dd class="font-medium text-[#16213A]">
                     {{ $class['grade'] }}
                 </dd>
-
             </div>
 
             <div class="flex justify-between px-8 py-4">
-
                 <dt class="text-xs uppercase tracking-[0.1em] text-slate-400">
                     Jurusan
                 </dt>
@@ -68,11 +61,9 @@
                 <dd class="font-medium text-[#16213A]">
                     {{ $class['major'] }}
                 </dd>
-
             </div>
 
             <div class="flex justify-between px-8 py-4">
-
                 <dt class="text-xs uppercase tracking-[0.1em] text-slate-400">
                     Wali Kelas
                 </dt>
@@ -80,7 +71,6 @@
                 <dd class="font-medium text-[#16213A]">
                     {{ $class['homeroom_teacher'] }}
                 </dd>
-
             </div>
 
         </dl>

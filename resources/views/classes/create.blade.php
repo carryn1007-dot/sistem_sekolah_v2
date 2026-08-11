@@ -4,9 +4,9 @@
 
 @section('content')
 
-    <x-page-header title="Tambah Kelas" description="Tambahkan data kelas baru ke dalam sistem sekolah." />
+    <x-page-header :title="$title" description="Tambahkan data kelas baru ke dalam sistem sekolah." />
 
-    <form action="{{ route('classes.store') }}" method="POST" class="space-y-6 border border-[#E5E3DB] bg-white p-8">
+    <form action="{{ route('classes.store') }}" method="POST" class="mt-6 space-y-6 border border-[#E5E3DB] bg-white p-8">
 
         @csrf
 
@@ -82,7 +82,7 @@
 
             <button type="submit"
                 class="bg-[#16213A] px-6 py-2.5 text-sm font-medium text-white transition hover:bg-[#26324f]">
-                Simpan Kelas
+                Simpan Data
             </button>
 
         </div>
