@@ -14,7 +14,8 @@
 
         {{-- Nama Kelas --}}
         <div>
-            <label for="name" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
+            <label for="name"
+                class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
                 Nama Kelas
             </label>
 
@@ -24,12 +25,14 @@
 
         {{-- Tingkat --}}
         <div>
-            <label for="grade" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
+            <label for="grade"
+                class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
                 Tingkat
             </label>
 
             <select id="grade" name="grade"
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+
                 <option value="X" {{ $class['grade'] === 'X' ? 'selected' : '' }}>
                     X
                 </option>
@@ -41,38 +44,47 @@
                 <option value="XII" {{ $class['grade'] === 'XII' ? 'selected' : '' }}>
                     XII
                 </option>
+
             </select>
         </div>
 
         {{-- Jurusan --}}
         <div>
-            <label for="major_id" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
+            <label for="major_id"
+                class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
                 Jurusan
             </label>
 
             <select id="major_id" name="major_id"
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+
                 @foreach ($majors as $major)
-                    <option value="{{ $major['id'] }}" {{ $class['major_id'] == $major['id'] ? 'selected' : '' }}>
+                    <option value="{{ $major['code'] }}"
+                        {{ $class['major_id'] == $major['code'] ? 'selected' : '' }}>
                         {{ $major['code'] }} - {{ $major['name'] }}
                     </option>
                 @endforeach
+
             </select>
         </div>
 
         {{-- Wali Kelas --}}
         <div>
-            <label for="teacher_id" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
+            <label for="teacher_id"
+                class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
                 Wali Kelas
             </label>
 
             <select id="teacher_id" name="teacher_id"
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+
                 @foreach ($teachers as $teacher)
-                    <option value="{{ $teacher['id'] }}" {{ $class['teacher_id'] == $teacher['id'] ? 'selected' : '' }}>
+                    <option value="{{ $teacher['name'] }}"
+                        {{ $class['teacher_id'] == $teacher['name'] ? 'selected' : '' }}>
                         {{ $teacher['name'] }}
                     </option>
                 @endforeach
+
             </select>
         </div>
 

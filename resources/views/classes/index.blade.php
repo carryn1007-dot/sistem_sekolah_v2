@@ -93,7 +93,8 @@
                                     @csrf
                                     @method('DELETE')
 
-                                    <button type="submit" class="text-sm font-medium text-red-700 hover:underline">
+                                    <button type="submit"
+                                        class="text-sm font-medium text-red-700 hover:underline">
                                         Hapus
                                     </button>
 
