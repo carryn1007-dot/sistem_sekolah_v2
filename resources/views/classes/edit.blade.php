@@ -79,8 +79,7 @@
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
 
                 @foreach ($teachers as $teacher)
-                    <option value="{{ $teacher['name'] }}"
-                        {{ $class['teacher_id'] == $teacher['name'] ? 'selected' : '' }}>
+                    <option {{ $class['teacher_id'] === $teacher['id'] ? 'selected' : '' }} value="{{ $teacher['id'] }}">
                         {{ $teacher['name'] }}
                     </option>
                 @endforeach
