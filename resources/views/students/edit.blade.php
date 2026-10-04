@@ -6,7 +6,7 @@
 
     <x-page-header :title="$title" description="Ubah data siswa yang sudah terdaftar dalam buku induk." />
 
-    <form action="{{ route('students.update', $student['id']) }}" method="POST"
+    <form action="{{ route('students.update', ['student' => $student->id]) }}" method="POST"
         class="mt-6 space-y-6 border border-[#E5E3DB] bg-white p-8">
 
         @csrf
@@ -17,17 +17,48 @@
                 NIS
             </label>
 
-            <input type="text" id="nis" name="nis" value="{{ $student['nis'] }}"
+            <input type="text" id="nis" name="nis" value="{{ old('nis', $student->nis) }}"
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
-        </div>
+            @error('nis')
+            <span class="text-red-500 py-2">{{ $message }}</span>
+            @enderror
+            </div>
 
         <div>
             <label for="name" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
                 Nama Lengkap
             </label>
 
-            <input type="text" id="name" name="name" value="{{ $student['name'] }}"
+            <input type="text" id="name" name="name" value="{{ old('nis', $student->name) }}"
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+            @error('name')
+            <span class="text-red-500 py-2">{{ $message }}</span>
+            @enderror
+            </div>
+
+        <div>
+            <label for="gender" class="mb-1.5 block text-xs font-semibold uppercase tracking-[0.1em] text-[#16213A]">
+                Jenis Kelamin
+            </label>
+
+            <select id="gender" name="gender"
+                class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
+
+                <option value="">
+                    Pilih gender
+                </option>
+
+                <option value="Laki-Laki" @selected(old('gender', $student->gender) === 'Laki-Laki')>
+                    Laki-Laki
+                </option>
+
+                <option value="Perempuan" @selected(old('gender', $student->gender) === 'Perempuan')>
+                    Perempuan
+                </option>
+            </select>
+            @error('gender')
+            <span class="text-red-500 py-2">{{ $message }}</span>
+            @enderror
         </div>
 
         <div>
@@ -38,19 +69,25 @@
             <select id="major" name="major"
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
 
-                <option value="AKL" {{ $student['major'] === 'AKL' ? 'selected' : '' }}>
+                <option value="">
+                    Pilih jurusan
+                </option>
+
+                <option value="AKL" @selected(old('major', $student->major) === 'AKL')>
                     AKL
                 </option>
 
-                <option value="TKJ" {{ $student['major'] === 'TKJ' ? 'selected' : '' }}>
+                <option value="TKJ" @selected(old('major', $student->major) === 'TKJ')>
                     TKJ
                 </option>
 
-                <option value="BD" {{ $student['major'] === 'BD' ? 'selected' : '' }}>
-                    BD
+                <option value="BiD" @selected(old('major', $student->major) === 'BiD')>
+                    BiD
                 </option>
-
             </select>
+            @error('major')
+            <span class="text-red-500 py-2">{{ $message }}</span>
+            @enderror
         </div>
 
         <div>
@@ -58,13 +95,16 @@
                 Kelas
             </label>
 
-            <input type="text" id="class" name="class" value="{{ $student['class'] }}"
+            <input type="text" id="class" name="class" value="{{ old('class', $student->class) }}"
                 class="w-full border border-[#D9D6CD] bg-[#FCFBF8] px-3.5 py-2.5 text-sm focus:border-[#A16207] focus:bg-white focus:outline-none">
-        </div>
+            @error('class')
+            <span class="text-red-500 py-2">{{ $message }}</span>
+            @enderror
+            </div>
 
         <div class="flex justify-end gap-4 border-t border-[#EFEDE6] pt-6">
 
-            <a href="{{ route('students.show', $student['id']) }}"
+            <a href="{{ route('students.index', ['student' => $student->id]) }}"
                 class="px-4 py-2.5 text-sm font-medium text-slate-500 hover:text-[#16213A]">
                 Batal
             </a>

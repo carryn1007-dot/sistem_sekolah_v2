@@ -57,16 +57,16 @@ Route::name('students.')
         Route::post('/', [StudentController::class, 'store'])
             ->name('store');
 
-        Route::get('/{id}', [StudentController::class, 'show'])
+        Route::get('/{student}', [StudentController::class, 'show'])
             ->name('show');
 
-        Route::get('/{id}/edit', [StudentController::class, 'edit'])
+        Route::get('/{student}/edit', [StudentController::class, 'edit'])
             ->name('edit');
 
-        Route::put('/{id}', [StudentController::class, 'update'])
+        Route::put('/{student}', [StudentController::class, 'update'])
             ->name('update');
 
-        Route::delete('/{id}', [StudentController::class, 'destroy'])
+        Route::delete('/{student}', [StudentController::class, 'destroy'])
             ->name('destroy');
     });
 
