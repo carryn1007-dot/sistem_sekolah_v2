@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\Student\StoreRequest;
+use App\Http\Requests\Student\UpdateRequest;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -25,20 +27,14 @@ class StudentController extends Controller
         $title = 'Sistem Sekolah - Catat Siswa Baru';
 
         return view('students.create', [
-            'title' => $title,
+            'title' => $title
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         // Validasi
-        $validatedRequest = $request->validate([
-            'nis' => ['required','string','size:4','unique:students,nis,'],
-            'name' => ['required','string'],
-            'gender' => ['required', 'string','in:Laki-Laki,Perempuan'],
-            'major' => ['required', 'string','in:AKL,TKJ,BiD'],
-            'class' => ['required', 'string']
-        ]);
+        $validatedRequest = $request->validated();
 
         // Tambahkan Ke Database
         Student::create($validatedRequest);
@@ -66,16 +62,10 @@ class StudentController extends Controller
         ]);
     }
 
-    public function update(Request $request, Student $student)
+    public function update(UpdateRequest $request, Student $student)
     {
         // Validasi
-        $validatedRequest = $request->validate([
-            'nis' => ['required','string','size:4','unique:students,nis,' . $student->id],
-            'name' => ['required','string'],
-            'gender' => ['required', 'string','in:Laki-Laki,Perempuan'],
-            'major' => ['required', 'string','in:AKL,TKJ,BiD'],
-            'class' => ['required', 'string']
-        ]);
+        $validatedRequest = $request->validated();
 
         //Update Data
         $student->update($validatedRequest);
