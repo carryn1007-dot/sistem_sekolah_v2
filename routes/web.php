@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\TeacherController;
@@ -14,6 +15,11 @@ use App\Http\Controllers\SchoolClass\EditController as ClassEditController;
 use App\Http\Controllers\SchoolClass\UpdateController as ClassUpdateController;
 use App\Http\Controllers\SchoolClass\DestroyController as ClassDestroyController;
 
+//Auntentikasi
+Route::get('/login',[AuthController::class, 'loginView'])->name('login-view');
+Route::post('/login',[AuthController::class, 'loginPost'])->name('login-post');
+Route::get('/register',[AuthController::class, 'registerView'])->name('register-view');
+Route::post('/register',[AuthController::class, 'registerPost'])->name('register-post');
 
 // Teacher
 Route::name('teachers.')
