@@ -16,15 +16,14 @@ use App\Http\Controllers\SchoolClass\UpdateController as ClassUpdateController;
 use App\Http\Controllers\SchoolClass\DestroyController as ClassDestroyController;
 
 //Auntentikasi
-Route::get('/login',[AuthController::class, 'loginView'])->name('login-view');
-Route::post('/login',[AuthController::class, 'loginPost'])->name('login-post');
-Route::get('/register',[AuthController::class, 'registerView'])->name('register-view');
-Route::post('/register',[AuthController::class, 'registerPost'])->name('register-post');
+Route::get('/login',[AuthController::class, 'loginView'])->name('login-view')->middleware('guest');
+Route::post('/login',[AuthController::class, 'loginPost'])->name('login-post')->middleware('guest');
+Route::get('/register',[AuthController::class, 'registerView'])->name('register-view')->middleware('guest');
+Route::post('/register',[AuthController::class, 'registerPost'])->name('register-post')->middleware('guest');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 // Teacher
-Route::name('teachers.')
-    ->prefix('teachers')
-    ->group(function () {
+Route::name('teachers.')->middleware(['role:teacher','auth'])->prefix('teachers')->group(function () {
 
         Route::get('/', [TeacherController::class, 'index'])
             ->name('index');
@@ -50,9 +49,7 @@ Route::name('teachers.')
 
 
 // Student
-Route::name('students.')
-    ->prefix('students')
-    ->group(function () {
+Route::name('students.')->middleware(['role:student,teacher','auth'])->prefix('students')->group(function () {
 
         Route::get('/', [StudentController::class, 'index'])
             ->name('index');
@@ -78,9 +75,7 @@ Route::name('students.')
 
 
 // SchoolClass - Invokable Controllers
-Route::name('classes.')
-    ->prefix('classes')
-    ->group(function () {
+Route::name('classes.')->middleware(['role:teacher','auth'])->prefix('classes')->group(function () {
 
         Route::get('/', ClassIndexController::class)
             ->name('index');
@@ -106,4 +101,4 @@ Route::name('classes.')
 
 
 // Major
-Route::resource('majors', MajorController::class);
+Route::resource('majors', MajorController::class)->middleware(['role:teacher','auth']);

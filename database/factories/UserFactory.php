@@ -13,6 +13,11 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory
 {
     /**
+     * Menghubungkan Factory ini dengan Model User
+     */
+    protected $model = User::class;
+
+    /**
      * The current password being used by the factory.
      */
     protected static ?string $password;
@@ -30,6 +35,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'role' => 'student',
         ];
     }
 
